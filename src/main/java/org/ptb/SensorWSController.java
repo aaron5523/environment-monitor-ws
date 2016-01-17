@@ -14,12 +14,22 @@ import org.ptb.repo.SensorGroupRepository;
 import org.ptb.repo.SensorReadingRepository;
 import org.ptb.repo.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
 public class SensorWSController {
+	
+	@Autowired
+	private UbidotUpdater update;
+	
 	@Autowired
 	private SensorRepository sensorRepo;
 
@@ -62,7 +72,13 @@ public class SensorWSController {
 		Controller c = checkAndGetController(controllerId);
 		Sensor sensor = checkAndGetSensor(c, sensorId);
 		ControllerReading cr = checkAndGetSensorGroupReading(c, sensor);
+		
 		if (null != rv) {
+			if (! "NAN".equalsIgnoreCase(rv)) {
+				update.setSensorId(sensorId);
+				update.setSensorVal(rv);
+				update.doUpdate();
+			}
 			if (null != cr) {
 				if (null != cr.getSensorReadingMap()) {
 					if (cr.getSensorReadingMap().containsKey(sensor.getId())) {
