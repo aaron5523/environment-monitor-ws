@@ -74,7 +74,7 @@ public class SensorWSController {
 		ControllerReading cr = checkAndGetSensorGroupReading(c, sensor);
 		
 		if (null != rv) {
-			if (! "NAN".equalsIgnoreCase(rv)) {
+			if (! "NAN".equalsIgnoreCase(rv) && ! "testVal".equalsIgnoreCase(rv)) {
 				update.setSensorId(sensorId);
 				update.setSensorVal(rv);
 				update.doUpdate();
