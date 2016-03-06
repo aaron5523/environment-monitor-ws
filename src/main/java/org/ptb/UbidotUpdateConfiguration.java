@@ -26,6 +26,9 @@ public class UbidotUpdateConfiguration {
     @Value("${ubidots.humid_id}")
 	private String humid_id;
     
+    @Value("${ubitdots.worm_bin_temp_id}")
+	private String worm_bin_temp_id;
+    
     public UbidotUpdateConfiguration() {
     	
     }
@@ -71,6 +74,13 @@ public class UbidotUpdateConfiguration {
 	 */
 	public String getGET_PATH() {
 		return path;
+	}
+
+	/**
+	 * @return the worm_bin_temp_id
+	 */
+	public String getWorm_bin_temp_id() {
+		return worm_bin_temp_id;
 	}
     
     

@@ -37,6 +37,8 @@ public class UbidotUpdater {
 			updateSensorId = config.getTEMP_ID();
 		} else if ( sensorId.equalsIgnoreCase("h1") ){
 			updateSensorId = config.getHUMID_ID();
+		} else if ( sensorId.equalsIgnoreCase("wt1") ){
+			updateSensorId = config.getWorm_bin_temp_id();
 		}
 		HttpResponse<JsonNode> results;
 		try {
